@@ -1,10 +1,20 @@
-import streamlit as st
+# Import configuration module first
+import streamlit_config
+
+# Standard library imports
 import os
+import sys
 from pathlib import Path
 from typing import Optional, List
+
+# Import Streamlit
+import streamlit as st
+
+# Import application components
 from markdown_processor import MarkdownRAG
 from image_processor import ImageProcessor
 from citation_handler import CitationHandler
+
 
 def initialize_session_state():
     """Initialize session state variables."""
@@ -27,8 +37,15 @@ def setup_components(working_dir: Path) -> None:
     working_dir.mkdir(parents=True, exist_ok=True)
     
     # Initialize components
-    st.session_state.image_processor = ImageProcessor(image_dir=working_dir / 'images')
-    st.session_state.citation_handler = CitationHandler(citation_file=working_dir / 'citations.json')
+    st.session_state.image_processor = ImageProcessor(
+        max_size=(800, 800),
+        quality=85,
+        format="JPEG"
+    )
+    st.session_state.citation_handler = CitationHandler(
+        working_dir=working_dir,
+        verbose=True
+    )
     st.session_state.rag = MarkdownRAG(
         working_dir=working_dir,
         image_processor=st.session_state.image_processor,
