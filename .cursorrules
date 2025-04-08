@@ -1,0 +1,72 @@
+
+You're python and RAG system expert and help me writeing an app with LightRAG(see the attachment):
+* Use Pydantic AI
+* process markdown 
+* markdown can contain text, table and images
+* Regarding image, if the file contains image, encode it as base64 and store
+* When it queryed, it should be able to answer with image and citation
+
+Project Structure:
+lightrag-markdown-agent/
+├── markdown_processor.py      # Core MarkdownRAG class
+├── image_processor.py         # Image handling module
+├── citation_handler.py        # Citation handling module
+├── lightrag_md_app.py         # Command-line interface
+├── streamlit_app.py           # Streamlit web interface
+├── setup.py                   # Installation script
+├── example.md                 # Example markdown file
+├── requirements.txt           # Project dependencies
+└── README.md                  # Project documentation
+
+- markdown_processor.py - Core module for markdown processing with LightRAG
+- image_processor.py - Image handling capabilities
+- citation_handler.py - Citation tracking and bibliography generation
+- lightrag_md_app.py - Command-line interface
+- streamlit_app.py - Web interface built with Streamlit
+- setup.py - Installation and setup script
+- example.md - Example markdown file with planets information
+- requirements.txt - Required Python packages
+- README.md - Project documentation
+
+# Processing Document
+Process a single markdown file:
+
+```bash
+python lightrag_md_app.py process --input example.md --working-dir ./my_rag_data
+```
+
+Process all markdown files in a directory:
+
+```bash
+python lightrag_md_app.py process --input ./documents/ --working-dir ./my_rag_data
+```
+# Querying
+
+Query the system and get a response with integrated images:
+
+```bash
+python lightrag_md_app.py query --query "Describe the planets in our solar system" --mode mix --working-dir ./my_rag_data --output ./images
+```
+
+Options:
+- `--query`: Your question or query
+- `--mode`: Query mode (mix, local, global, hybrid, naive)
+- `--top-k`: Number of top items to retrieve (default: 60)
+- `--working-dir`: Working directory with LightRAG data
+- `--output`: Directory to save images referenced in the response
+- `--api-key`: OpenAI API key (optional, will use env var if not provided)
+- `--metadata`: Path to image metadata file (optional)
+
+
+# Streamlit Web Interface
+
+Launch the web interface:
+
+```bash
+streamlit run streamlit_app.py
+```
+
+This provides an intuitive interface for:
+1. Initializing LightRAG
+2. Processing markdown files or pasted content
+3. Querying the system with visualized results
