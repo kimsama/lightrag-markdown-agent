@@ -11,6 +11,11 @@ A powerful RAG (Retrieval-Augmented Generation) system for processing and queryi
 - Command-line interface and Streamlit web UI
 - Support for both single file and directory processing
 
+## Requirements
+
+- Python 3.11 (higher version such as 3.13 may not work installing other dependancies)
+- OpenAI API key
+
 ## Installation
 
 ```bash
